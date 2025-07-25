@@ -21,6 +21,14 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_LOGIN_BANNER: '"Teslo Shop Database Administration"'
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
     container_name: teslo-pgadmin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - db
+
+volumes:
+  pgadmin-data:

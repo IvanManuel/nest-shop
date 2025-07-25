@@ -7,6 +7,9 @@ postgres/
 
 .env
 
+# Docker installation script
+get-docker.sh
+
 # Logs
 logs
 *.log
