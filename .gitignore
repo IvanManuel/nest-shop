@@ -10,6 +10,18 @@ postgres/
 # Docker installation script
 get-docker.sh
 
+# Static files - Ignore images but keep folders
+static/products/*.jpg
+static/products/*.jpeg
+static/products/*.png
+static/products/*.gif
+static/products/*.webp
+static/uploads/*.jpg
+static/uploads/*.jpeg
+static/uploads/*.png
+static/uploads/*.gif
+static/uploads/*.webp
+
 # Logs
 logs
 *.log
