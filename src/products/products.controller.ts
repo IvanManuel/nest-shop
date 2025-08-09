@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, Query } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { ProductsService } from './products.service';
 
@@ -9,7 +10,9 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Auth, GetUser } from 'src/auth/decorators';
 import { ValidRoles } from 'src/auth/interfaces';
 import { User } from 'src/auth/entities/user.entity';
+import { Product } from './entities';
 
+@ApiTags('Products')
 @Controller('products')
 // Para controlar el acceso a los endpoints de este controlador, se usa el decorador @Auth
 // @Auth( ValidRoles.admin )
@@ -19,6 +22,9 @@ export class ProductsController {
   @Post()
   // Para crear un producto, debe ser un usuario con el rol de administrador
   @Auth( ValidRoles.admin )
+  @ApiResponse({ status: 201, description: 'Product created successfully', type: Product })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 403, description: 'Forbidden. Token related issues' })
   create(@Body() createProductDto: CreateProductDto,
     @GetUser() user: User) {
     return this.productsService.create(createProductDto, user);
